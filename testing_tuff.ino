@@ -5,10 +5,10 @@ const char *cmd_prompt = "TUFF>> ";
 const char *cmd_unrecog = "Commands: on, off, update, synchronize, reset, cmd, clock, data";
 
 // Change these for any other board.
-// pin 40 (P2_5) is clock
-// pin 39 (P2_4) is data
-#define CLOCK_PIN 40
-#define DATA_PIN 39
+// pin 19 (P2_0) is clock
+// pin 18 (P2_2) is data
+#define CLOCK_PIN 19
+#define DATA_PIN 18
 
 void data_cmd(int arg_cnt, char **args) {
   unsigned int val;
