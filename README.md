@@ -33,6 +33,8 @@ between power connections and the data connections, so it makes it a bit easier.
 if you apply power to +BIASV, there will be DC voltage at the input connector! The Coilcraft chokes can handle multiple amps
 of current, and have practically zero resistance (0.0151 ohms).
 
+**Note** : using the 'wire bundle cable' shipped with the MINITUFFv2, the colors are yellow = clock, orange = data, green = ground.
+
 ## TUFF Tester Command Line
 
 Push the RST button on the MSP-EXP430F5529. On the serial port, you should see:
