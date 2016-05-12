@@ -4,8 +4,12 @@ const char *cmd_banner = "** TUFF Command Line Tester Ready **";
 const char *cmd_prompt = "TUFF>> ";
 const char *cmd_unrecog = "Commands: on, off, update, synchronize, reset, cmd, clock, data";
 
+// Change these for any other board.
 // pin 40 (P2_5) is clock
 // pin 39 (P2_4) is data
+#define CLOCK_PIN 40
+#define DATA_PIN 39
+
 void data_cmd(int arg_cnt, char **args) {
   unsigned int val;
   arg_cnt--;
@@ -17,9 +21,9 @@ void data_cmd(int arg_cnt, char **args) {
   }
   val = atoi(*args);
   if (!val) {
-    digitalWrite(39, 0);
+    digitalWrite(DATA_PIN, 0);
   } else {
-    digitalWrite(39, 1);
+    digitalWrite(DATA_PIN, 1);
   }
 }
   
@@ -34,23 +38,23 @@ void clock_cmd(int arg_cnt, char **args) {
   }
   val = atoi(*args);
   if (!val) {
-    digitalWrite(40, 0);
+    digitalWrite(CLOCK_PIN, 0);
   } else {
-    digitalWrite(40, 1);
+    digitalWrite(CLOCK_PIN, 1);
   }
 }
 
 void sendCommand(unsigned int val) {
   // Lower clock first. It should idle high.
-  digitalWrite(40, 0);
-  digitalWrite(39, 0);
+  digitalWrite(CLOCK_PIN, 0);
+  digitalWrite(DATA_PIN, 0);
   for (unsigned int i=0;i<16;i++) {
-      digitalWrite(40, 0);
+      digitalWrite(CLOCK_PIN, 0);
       delayMicroseconds(10);
-      if (val & 0x8000) digitalWrite(39, 1);
-      else digitalWrite(39, 0);
+      if (val & 0x8000) digitalWrite(DATA_PIN, 1);
+      else digitalWrite(DATA_PIN, 0);
       delayMicroseconds(10);
-      digitalWrite(40, 1);
+      digitalWrite(CLOCK_PIN, 1);
       delayMicroseconds(20);
       val = val << 1;
   }
@@ -85,23 +89,6 @@ void synchronize(int arg_cnt, char **args) {
   delay(100);
   Serial.println("Synchronized.");
   Serial.print(cmd_prompt);
-}
-void setup()
-{
-  // put your setup code here, to run once:
-  cmdInit(9600);
-  digitalWrite(40, 1);
-  digitalWrite(39, 0);
-  pinMode(40, OUTPUT);
-  pinMode(39, OUTPUT);
-  cmdAdd("on", notchOn);
-  cmdAdd("off", notchOff);
-  cmdAdd("update", update);
-  cmdAdd("synchronize", synchronize);
-  cmdAdd("reset", reset_cmd);
-  cmdAdd("cmd", cmd_cmd);
-  cmdAdd("clock", clock_cmd);
-  cmdAdd("data", data_cmd);
 }
 
 void update(int arg_cnt, char **args) {
@@ -218,6 +205,24 @@ void notchOff(int arg_cnt, char **args) {
   Serial.print("Sending cmd ");
   Serial.println(cmd, HEX);
   sendCommand(cmd);
+}
+
+void setup()
+{
+  // put your setup code here, to run once:
+  cmdInit(9600);
+  digitalWrite(CLOCK_PIN, 1);
+  digitalWrite(DATA_PIN, 0);
+  pinMode(CLOCK_PIN, OUTPUT);
+  pinMode(DATA_PIN, OUTPUT);
+  cmdAdd("on", notchOn);
+  cmdAdd("off", notchOff);
+  cmdAdd("update", update);
+  cmdAdd("synchronize", synchronize);
+  cmdAdd("reset", reset_cmd);
+  cmdAdd("cmd", cmd_cmd);
+  cmdAdd("clock", clock_cmd);
+  cmdAdd("data", data_cmd);
 }
 
 void loop()
