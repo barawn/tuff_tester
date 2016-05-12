@@ -22,9 +22,9 @@ The last 2 pins are not present on the MINITUFF.
 
 Connect:
 * Pin 2/3 to GND/+5V.
-* Pin 5 to P2.5 on the MSP-EXP430F5529.
+* Pin 5 to P2.0 on the MSP-EXP430F5529.
 * Pin 6 to GND (above P2.0) on MSP-EXP430F5529.
-* Pin 7 to P2.4 on the MSP-EXP430F5529.
+* Pin 7 to P2.2 on the MSP-EXP430F5529.
 
 You can use any pins to connect GND, all the grounds are common. This connection scheme leaves 1 space (pin 4) 
 between power connections and the data connections, so it makes it a bit easier.
@@ -34,6 +34,7 @@ if you apply power to +BIASV, there will be DC voltage at the input connector! T
 of current, and have practically zero resistance (0.0151 ohms).
 
 **Note** : using the 'wire bundle cable' shipped with the MINITUFFv2, the colors are yellow = clock, orange = data, green = ground.
+Note that one side is labelled as "TESTER" (goes to MSP-EXP430F5529) and the other side is labelled as "TUFF" (goes to TUFF).
 
 ## TUFF Tester Command Line
 
