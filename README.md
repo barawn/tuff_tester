@@ -34,7 +34,7 @@ if you apply power to +BIASV, there will be DC voltage at the input connector! T
 of current, and have practically zero resistance (0.0151 ohms).
 
 **Note** : using the 'wire bundle cable' shipped with the MINITUFFv2, the colors are yellow = clock, orange = data, green = ground.
-Note that one side is labelled as "TESTER" (goes to MSP-EXP430F5529) and the other side is labelled as "TUFF" (goes to TUFF).
+Note that one side is labelled as "TESTER" (goes to MSP-EXP430F5529) and the other side is labelled as "TUFF" (goes to TUFF). See the image here: https://github.com/barawn/tuff_tester/blob/master/tuff_tester_connections.jpg
 
 ## TUFF Tester Command Line
 
